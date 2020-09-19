@@ -2,31 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
+using System.IO;
 [ExecuteInEditMode]
 public class NoiseTerrainMain : MonoBehaviour
 {
-    public int pixWidth = 300;
-    public int pixHeight = 300;
-
+    [Header("Map Generation")]
     public int height = 5;
     public float offstep = 0.25f;
     public float step = 0.25f;
-    public Material material;
-
-    public NoiseLayer[] noiseLayers;
-    public Texture2D noiseTex;
-    public NoiseLayer cloudLayer;
-    public NoiseLayer vegetationLayer;
-    public NoiseLayer waterScrollingLayer;
     public float mapSizeWidth;
     public float mapSizeHeight;
+    public Material material;
 
+    [Header("Terrain Generation")]
+    public NoiseTextureGenerator terrainNoiseTextureGenerator;
 
+    [Header("Cloud Generation")]
+    public NoiseLayer cloudLayer;
+
+    [Header("Vegetaion Generation")]
+    public NoiseLayer vegetationLayer;
+
+    [Header("Water Generation")]
+    public NoiseLayer waterScrollingLayer;
+
+    [Header("Visible Points")]
     public List<VisiblePoint> visiblePoints = new List<VisiblePoint>();
     public GameObject visiblePointParent;
     public GameObject visiblePoint;
 
+
+    [Header("Settings")]
+   [SerializeField] private bool runtimeGeneration;
+
+    [Header("Controls")]
     [Range(0,1)]
     public float waterLevel;
     [Range(0, 1)]
@@ -35,6 +44,7 @@ public class NoiseTerrainMain : MonoBehaviour
     public float cloudLevel;
     [Range(0, 1)]
     public float cloudHeight;
+
     void Awake()
     {
         //  visiblePoints.Clear();
@@ -52,75 +62,34 @@ public class NoiseTerrainMain : MonoBehaviour
     }
     public void GenerateCloudLayer()
     {
-        cloudLayer.GenerateNoiseTexture(noiseLayers.Length +1, 128, 128,NoiseType.perlin);
+        cloudLayer.GenerateNoiseTexture("_CloudTex", 128, 128, NoiseType.perlin);
         material.SetTexture("_CloudTex", cloudLayer.noiseTex);
     }
     public void GenerateVegetationLayer()
     {
-        vegetationLayer.GenerateNoiseTexture(noiseLayers.Length, pixWidth, pixHeight, NoiseType.perlin);
+        vegetationLayer.GenerateNoiseTexture("_VegatationTex", 128, 128, NoiseType.perlin);
         material.SetTexture("_VegatationTex", vegetationLayer.noiseTex);
     }
     public void GenerateWaterScrollingLayer()
     {
-        waterScrollingLayer.GenerateNoiseTexture(noiseLayers.Length, pixWidth, pixHeight, NoiseType.simplex);
+        waterScrollingLayer.GenerateNoiseTexture("_WaterScrollingTex", 128, 128, NoiseType.simplex);
         material.SetTexture("_WaterScrollingTex", waterScrollingLayer.noiseTex);
     }
+
     public void GenerateNoiseTexture()
     {
-        //noiseTex = new Texture2D(pixWidth, pixHeight);
-        for (int i = noiseLayers.Length-1; i >= 0; --i)
-        {
-            noiseLayers[i].GenerateNoiseTexture(i,pixWidth,pixHeight, NoiseType.perlin);
-        }
+        if (terrainNoiseTextureGenerator == null)
+            return;
+        terrainNoiseTextureGenerator.GenerateNoiseTexture();
+        terrainNoiseTextureGenerator.CombineLayers();
+        material.SetTexture("_MainTex", terrainNoiseTextureGenerator.noiseTex);
     }
-    void AddLayerToMain(int _noiseLayer)
+    public void GenerateAllTextures()
     {
-        for (int w = 0; w < pixWidth; w++)
-        {
-            for (int h = 0; h < pixHeight; h++)
-            {
-                noiseTex.SetPixel(w, h, (noiseTex.GetPixel(w, h) + (noiseLayers[_noiseLayer].noiseTex.GetPixel(w, h)/2)));
-            }
-        }
-
-    }
-    void SubtractLayerFromMain(int _noiseLayer)
-    {
-        for (int w = 0; w < pixWidth; w++)
-        {
-            for (int h = 0; h < pixHeight; h++)
-            {
-                noiseTex.SetPixel(w, h, (noiseTex.GetPixel(w, h) - (noiseLayers[_noiseLayer].noiseTex.GetPixel(w, h)/2)));
-            }
-        }
-    }
-    public void CombineLayers()
-    {
-
-        noiseTex = new Texture2D(pixWidth, pixHeight);
-        Color[] blankColour = new Color[pixWidth * pixHeight];
-        noiseTex.SetPixels(blankColour);
-        noiseTex.Apply();
-        for (int i = 0; i < noiseLayers.Length; i++)
-        {
-            switch (noiseLayers[i].addition)
-            {
-                case true:
-                    AddLayerToMain(i);
-                    break;
-                case false:
-                    SubtractLayerFromMain(i);
-                    break;
-            }
-        }
-        
-        noiseTex.Apply();
-
-        material.SetTexture("_MainTex", noiseTex);
-#if UNITY_EDITOR
-        AssetDatabase.CreateAsset(noiseTex, "Assets/NoiseTerrainGenerator/Terrain/mainTex");
-#endif
-        
+        GenerateNoiseTexture();
+        GenerateWaterScrollingLayer();
+        GenerateVegetationLayer();
+        GenerateCloudLayer();
     }
 
     public void GenerateMap()
@@ -189,7 +158,7 @@ public class NoiseTerrainMain : MonoBehaviour
     }
     void UpdateCloudLayer()
     {
-        cloudLayer.UpdateNoiseTexture(.5f, 0, NoiseType.perlin);
+        cloudLayer.UpdateNoiseTexture(.5f, 0,NoiseType.perlin);
     }
     public VisiblePoint AddVisiblePoint()
     {

@@ -11,6 +11,10 @@ public class NoiseTerrainMainEditor : Editor
         DrawDefaultInspector();
 
         NoiseTerrainMain main = (NoiseTerrainMain)target;
+        if (GUILayout.Button("Generate All Textures"))
+        {
+            main.GenerateAllTextures();
+        }
         if (GUILayout.Button("Generate Texture"))
         {
             main.GenerateNoiseTexture();
@@ -26,10 +30,6 @@ public class NoiseTerrainMainEditor : Editor
         if (GUILayout.Button("Generate Water Scrolling Texture"))
         {
             main.GenerateWaterScrollingLayer();
-        }
-        if (GUILayout.Button("Combine Layers"))
-        {
-            main.CombineLayers();
         }
         if (GUILayout.Button("Generate Map"))
         {

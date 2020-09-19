@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.IO;
 
 [System.Serializable]
-public class NoiseLayer 
+public class NoiseLayer
 {
     public bool addition;
     [SerializeField] public Texture2D noiseTex;
@@ -25,7 +26,7 @@ public class NoiseLayer
         }
         return result;
     }
-    public void GenerateNoiseTexture(int _id, int _pixWidth, int _pixHeight, NoiseType noiseType)
+    public void GenerateNoiseTexture(string _name, int _pixWidth, int _pixHeight, NoiseType noiseType)
     {
         pixWidth = _pixWidth;
         pixHeight = _pixHeight;
@@ -40,10 +41,12 @@ public class NoiseLayer
 
         CalcNoise(noiseType);
 #if UNITY_EDITOR
-        AssetDatabase.CreateAsset(noiseTex, "Assets/NoiseTerrainGenerator/Terrain/noiseTexLayer" + _id);
+        AssetDatabase.CreateAsset(noiseTex, "Assets/NoiseTerrainGenerator/Terrain/" + _name + "");
 #endif
-
-
+    }
+    public void GenerateNoiseTexture(int _id, int _pixWidth, int _pixHeight, NoiseType noiseType)
+    {
+        GenerateNoiseTexture(_id.ToString(), _pixWidth, _pixHeight, noiseType);
     }
     void GenerateNoiseTexture(float xDir, float yDir, NoiseType noiseType)
     {
@@ -53,7 +56,7 @@ public class NoiseLayer
 
         CalcNoise(noiseType);
     }
-    public void UpdateNoiseTexture(float xDir,float yDir, NoiseType noiseType)
+    public void UpdateNoiseTexture(float xDir, float yDir, NoiseType noiseType)
     {
         GenerateNoiseTexture(xDir * Time.deltaTime, yDir * Time.deltaTime, noiseType);
     }
@@ -76,7 +79,7 @@ public class NoiseLayer
                 else if (noiseType == NoiseType.simplex)
                 {
                     sample = SimplexNoise.SeamlessNoise(xOrg + x / pixWidth, yOrg + y / pixHeight, scale, scale, IntParseFast(seed));
-                   // sample = SimplexNoise.Noise(xCoord, yCoord);
+                    // sample = SimplexNoise.Noise(xCoord, yCoord);
                 }
 
                 if (sample < baseLevel)
