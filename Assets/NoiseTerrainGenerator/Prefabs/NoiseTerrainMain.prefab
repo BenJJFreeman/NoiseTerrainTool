@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1056231084237563845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1056231084237563847}
+  - component: {fileID: 1056231084237563844}
+  m_Layer: 0
+  m_Name: Main
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1056231084237563847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056231084237563845}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1056231084237563844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056231084237563845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5614a592ee020434da814772d29c34cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pixWidth: 300
+  pixHeight: 300
+  height: 45
+  offstep: 0
+  step: 0.9
+  material: {fileID: 2100000, guid: 177cd241a248b0240ad189f64394fc50, type: 2}
+  noiseLayers: []
+  noiseTex: {fileID: 2800000, guid: 23c820176cf27cf48b14dbc9fb55293e, type: 2}
+  vegetationLayer:
+    addition: 1
+    noiseTex: {fileID: 0}
+    seed: sfesfvsef
+    scale: 25
+    xOrg: 61039
+    yOrg: 26809
+    baseLevel: 0
+  mapSizeWidth: 500
+  mapSizeHeight: 500
+  visiblePoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  visiblePointParent: {fileID: 0}
+  visiblePoint: {fileID: 2797170391877515373, guid: 48a02fee0760bbb42bc7a727e3a85a77,
+    type: 3}
+  heughtTEstBlock: {fileID: 0}
+  waterLevel: 0.135
+  vegatationLevel: 0
