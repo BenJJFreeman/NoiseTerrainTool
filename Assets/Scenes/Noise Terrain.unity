@@ -2202,7 +2202,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cloudLayer.noiseTex
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2800000, guid: cee306dc1d9dcef44bd35e2058b9c130, type: 2}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: cloudLayer.xOrg
@@ -2252,7 +2252,7 @@ PrefabInstance:
         type: 3}
       propertyPath: waterScrollingLayer.noiseTex
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2800000, guid: 986284ad38d126d42a0f219c13f1b85b, type: 2}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: waterScrollingLayer.xOrg
@@ -2281,17 +2281,17 @@ PrefabInstance:
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: waterLevel
-      value: 0.451
+      value: 0.202
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: cloudLevel
-      value: 0.282
+      value: 0.303
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: cloudHeight
-      value: 0.747
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
@@ -2695,7 +2695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff18ba69f896bc4781d2e0e6dee915d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 215.6
+  range: 380.6
 --- !u!1 &1154905860
 GameObject:
   m_ObjectHideFlags: 0
@@ -3012,90 +3012,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230670744}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1270033662
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1270033664}
-  - component: {fileID: 1270033663}
-  m_Layer: 0
-  m_Name: Noise Texture Generator - terrain
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1270033663
+--- !u!114 &1270033663 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+    type: 3}
+  m_PrefabInstance: {fileID: 6882489079821326352}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1270033662}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8bd3eb3b851cfc48870da044915d65e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textureName: TerrainTexture
-  pixWidth: 300
-  pixHeight: 300
-  noiseLayers:
-  - addition: 1
-    noiseTex: {fileID: 2800000, guid: cc3caee526a3a19419b31c49cc7f0c47, type: 2}
-    seed: 3456
-    scale: 1
-    xOrg: 55682
-    yOrg: 48776
-    baseLevel: 0
-  - addition: 1
-    noiseTex: {fileID: 2800000, guid: 22b35b0bbde93974b957324a5910f905, type: 2}
-    seed: 2318
-    scale: 5
-    xOrg: 54154
-    yOrg: 54515
-    baseLevel: 0
-  - addition: 1
-    noiseTex: {fileID: 2800000, guid: 4d8c670a41a38f443924ba7af0be1223, type: 2}
-    seed: 2318
-    scale: 1
-    xOrg: 54154
-    yOrg: 54515
-    baseLevel: 0
-  - addition: 1
-    noiseTex: {fileID: 2800000, guid: 1de092d58fd1b114a90761b288007331, type: 2}
-    seed: 42135
-    scale: 1
-    xOrg: 86974
-    yOrg: 50201
-    baseLevel: 0
-  - addition: 0
-    noiseTex: {fileID: 2800000, guid: 8c709ef5971eb1f47baae885ed1b8442, type: 2}
-    seed: 456
-    scale: 4
-    xOrg: 11720
-    yOrg: 55334
-    baseLevel: 0
-  noiseTex: {fileID: 2800000, guid: 1b7390e33f2c1d5478164afd6c7d2c82, type: 2}
-  noiseType: 0
---- !u!4 &1270033664
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1270033662}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1319643133
 GameObject:
   m_ObjectHideFlags: 0
@@ -4755,3 +4683,177 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035344189}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &6882489079821326352
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6882489078910186734, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: m_Name
+      value: Noise Texture Generator - terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: textureName
+      value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[0].addition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[1].addition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[0].seed
+      value: 3123
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[1].seed
+      value: 4324
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[1].scale
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[0].scale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[0].noiseTex
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[0].xOrg
+      value: 39918
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[0].yOrg
+      value: 91980
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[1].noiseTex
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[1].xOrg
+      value: 51403
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[1].yOrg
+      value: 34623
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[2].addition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[2].noiseTex
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[2].seed
+      value: 453
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[2].scale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[2].xOrg
+      value: 51403
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[2].yOrg
+      value: 34623
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseTex
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186768, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186768, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186768, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186768, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186768, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186768, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186768, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186768, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186768, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186768, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186768, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a04c84f82b1bdbf41a87272950447f04, type: 3}
