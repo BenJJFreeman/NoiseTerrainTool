@@ -94,7 +94,7 @@
 		fixed _ScrollXSpeed;
 		fixed _ScrollYSpeed;
 
-
+		sampler2D _WaterScrollingTexDuplicate;
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {			
 			// checks if within distant of the ponts
@@ -186,38 +186,61 @@
 			if (w) {
 
 
+			//	float2 uv = IN.uv_WaterScrollingTex + (fixed2(_ScrollXSpeed, _ScrollYSpeed) * _Time);
+				
+				
+				// aimation
 				fixed2 scrolledUV = IN.uv_WaterScrollingTex;
+				fixed2 scrolledUVDuplicate = scrolledUV;
 				//fixed2 scrolledUV = IN.uv_CloudTex;
+
 
 				fixed xScrollValue = _ScrollXSpeed * _Time;
 				//fixed xScrollValue = 0;
 				fixed yScrollValue = _ScrollYSpeed * _Time;
 				//fixed yScrollValue = 0;
 
+				fixed2 uvOffset = fixed2(xScrollValue, yScrollValue);
+				
+				
 
-				scrolledUV += fixed2(xScrollValue, yScrollValue);
+				scrolledUV += uvOffset;
+				scrolledUVDuplicate -= uvOffset;
+
+				fixed2 scrolledUVAdd = scrolledUV + scrolledUVDuplicate;
+
+				
+				_WaterScrollingTexDuplicate = _WaterScrollingTex;
+
+
 				half4 c = tex2D(_WaterScrollingTex, scrolledUV);
-				//half4 c = tex2D(_CloudTex, scrolledUV);
+				half4 cd = tex2D(_WaterScrollingTexDuplicate, scrolledUVDuplicate);
+
+				half4 cO = (c + cd) /2;
+
+				fixed2 staticUV = IN.uv_WaterScrollingTex;
+				
+				half4 cS = tex2D(_WaterScrollingTex, staticUV);
+
+				half4 cM = (cO + cS) / 2;
+
+				c = cM;
+
+				c = (c + tex2D(_WaterScrollingTex, IN.uv_WaterScrollingTex).w)/2;
+				c = (c + tex2D(_WaterScrollingTex, IN.uv_WaterScrollingTex).z)/2;
+				 
+
+				c = c * cO;
 
 
-				o.Emission = lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).rgb;
-				o.Emission += c.rgb /2;
+				//o.uv = _WaterScrollingTex.xy + _WaterScrollingTex.zw;
+
+				// colour
+				//o.Emission = lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).rgb;
+				o.Emission = lerp(_HighWaterColor, _LowWaterColor, (c.rgb)).rgb;
+				//o.Emission += c.rgb;
 				o.Alpha = lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).a;
-				/*
-				if (!g) {
-					if (v) {
-						o.Emission = lerp(_HighVegetationColor, _LowVegetationColor, abs(heightDist / _ProjectionHeight)).rgb;
-						o.Alpha = lerp(_HighVegetationColor, _LowVegetationColor, abs(heightDist / _ProjectionHeight)).a;
-					}
-					else {
-						
-					}
 
-					//clip(_ProjectionRange  - abs(heightDist));
-				}else if(g) {
-					o.Emission = (lerp(_LowColor, _HighColor, abs(heightDist / _ProjectionHeight)).rgb + lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).rgb)/2;
-					o.Alpha = 1;
-				}*/
 			}
 			else if (uw) {
 				o.Emission = lerp(_LowUnderWaterColor, _HighUnderWaterColor, abs(heightDist / _ProjectionHeight)).rgb;

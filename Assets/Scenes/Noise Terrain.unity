@@ -2256,12 +2256,12 @@ PrefabInstance:
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: waterScrollingLayer.xOrg
-      value: 91267
+      value: 85843
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: waterScrollingLayer.yOrg
-      value: 75423
+      value: 23042
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
@@ -2281,7 +2281,7 @@ PrefabInstance:
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: waterLevel
-      value: 0.202
+      value: 0.215
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
@@ -2291,7 +2291,7 @@ PrefabInstance:
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: cloudHeight
-      value: 0.95
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
@@ -2346,7 +2346,7 @@ PrefabInstance:
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: waterScrollingLayer.seed
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
@@ -2391,7 +2391,7 @@ PrefabInstance:
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: waterScrollingLayer.scale
-      value: 1
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}

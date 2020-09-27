@@ -72,7 +72,7 @@ public class NoiseTerrainMain : MonoBehaviour
     }
     public void GenerateWaterScrollingLayer()
     {
-        waterScrollingLayer.GenerateNoiseTexture("_WaterScrollingTex", 128, 128, NoiseType.simplex);
+        waterScrollingLayer.GenerateNoiseTexture("_WaterScrollingTex", 512, 512, NoiseType.perlin);
         material.SetTexture("_WaterScrollingTex", waterScrollingLayer.noiseTex);
     }
 
