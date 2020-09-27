@@ -2202,7 +2202,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cloudLayer.noiseTex
       value: 
-      objectReference: {fileID: 2800000, guid: cee306dc1d9dcef44bd35e2058b9c130, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: cloudLayer.xOrg
@@ -2247,12 +2247,12 @@ PrefabInstance:
         type: 3}
       propertyPath: vegetationLayer.noiseTex
       value: 
-      objectReference: {fileID: 2800000, guid: 4b4d717488bf8c04ea9d429ca78f56fe, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: waterScrollingLayer.noiseTex
       value: 
-      objectReference: {fileID: 2800000, guid: 986284ad38d126d42a0f219c13f1b85b, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: waterScrollingLayer.xOrg
@@ -2386,12 +2386,12 @@ PrefabInstance:
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: waterScrollingLayer.baseLevel
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: waterScrollingLayer.scale
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}

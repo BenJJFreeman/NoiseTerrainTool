@@ -190,14 +190,14 @@
 				
 				
 				// aimation
-				fixed2 scrolledUV = IN.uv_WaterScrollingTex;
+				fixed2 scrolledUV = ((IN.uv_WaterScrollingTex -0.5) * 0.5 + 0.5);
 				fixed2 scrolledUVDuplicate = scrolledUV;
 				//fixed2 scrolledUV = IN.uv_CloudTex;
 
 
-				fixed xScrollValue = _ScrollXSpeed * _Time;
+				fixed xScrollValue = _ScrollXSpeed * _Time * unity_DeltaTime;
 				//fixed xScrollValue = 0;
-				fixed yScrollValue = _ScrollYSpeed * _Time;
+				fixed yScrollValue = _ScrollYSpeed * _Time * unity_DeltaTime;
 				//fixed yScrollValue = 0;
 
 				fixed2 uvOffset = fixed2(xScrollValue, yScrollValue);
@@ -226,8 +226,8 @@
 
 				c = cM;
 
-				c = (c + tex2D(_WaterScrollingTex, IN.uv_WaterScrollingTex).w)/2;
-				c = (c + tex2D(_WaterScrollingTex, IN.uv_WaterScrollingTex).z)/2;
+				c = (c + tex2D(_WaterScrollingTex, ((IN.uv_WaterScrollingTex - 0.5) * 0.5 + 0.5)).w)/2;
+				c = (c + tex2D(_WaterScrollingTex, ((IN.uv_WaterScrollingTex - 0.5) * 0.5 + 0.5)).z)/2;
 				 
 
 				c = c * cO;
@@ -236,11 +236,17 @@
 				//o.uv = _WaterScrollingTex.xy + _WaterScrollingTex.zw;
 
 				// colour
-				//o.Emission = lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).rgb;
-				o.Emission = lerp(_HighWaterColor, _LowWaterColor, (c.rgb)).rgb;
-				//o.Emission += c.rgb;
-				o.Alpha = lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).a;
-
+				if (c.r <= 0.1) {
+					o.Emission = fixed3(1, 1, 1);
+					//o.Emission += c.rgb;
+					o.Alpha =1;
+				}
+				else {
+					//o.Emission = lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).rgb;
+					o.Emission = lerp(_HighWaterColor, _LowWaterColor, (c.rgb)).rgb;
+					//o.Emission += c.rgb;
+					o.Alpha = lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).a;
+				}
 			}
 			else if (uw) {
 				o.Emission = lerp(_LowUnderWaterColor, _HighUnderWaterColor, abs(heightDist / _ProjectionHeight)).rgb;
