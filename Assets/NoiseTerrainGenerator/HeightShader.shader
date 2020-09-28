@@ -126,7 +126,7 @@
 			float heightDist = height - IN.worldPos.y;
 			
 			bool g = false;
-			if ((_ProjectionRange - abs(heightDist)) >0) {
+			if ((_ProjectionRange - abs(heightDist)) >0 || tex2D(_MainTex, IN.uv_MainTex).r > (IN.worldPos.y / _ProjectionHeight)) {
 				g = true;
 			}
 
@@ -195,9 +195,9 @@
 				//fixed2 scrolledUV = IN.uv_CloudTex;
 
 
-				fixed xScrollValue = _ScrollXSpeed * _Time * unity_DeltaTime;
+				fixed xScrollValue = _ScrollXSpeed * _Time;
 				//fixed xScrollValue = 0;
-				fixed yScrollValue = _ScrollYSpeed * _Time * unity_DeltaTime;
+				fixed yScrollValue = _ScrollYSpeed * _Time;
 				//fixed yScrollValue = 0;
 
 				fixed2 uvOffset = fixed2(xScrollValue, yScrollValue);
@@ -237,14 +237,14 @@
 
 				// colour
 				if (c.r <= 0.1) {
-					o.Emission = fixed3(1, 1, 1);
+					o.Emission = fixed3(0.75, 0.75, 0.75);
 					//o.Emission += c.rgb;
-					o.Alpha =1;
+					o.Alpha = 0.75;
 				}
 				else {
 					//o.Emission = lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).rgb;
 					o.Emission = lerp(_HighWaterColor, _LowWaterColor, (c.rgb)).rgb;
-					//o.Emission += c.rgb;
+					//o.Emission = c.rgb;
 					o.Alpha = lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).a;
 				}
 			}
@@ -271,7 +271,8 @@
 			}
 			else{
 				//clip(0);
-				//o.Emission = fixed3(1, 0, 0);
+				//o.Emission = fixed3(1, 0, 0);	
+				//o.Alpha = 1;
 			}
 			
 		}

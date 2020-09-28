@@ -24,7 +24,8 @@ public class NoiseTerrainMain : MonoBehaviour
     public NoiseLayer vegetationLayer;
 
     [Header("Water Generation")]
-    public NoiseLayer waterScrollingLayer;
+    public NoiseTextureGenerator waterScrollingNoiseTextureGenerator;
+  //  public NoiseLayer waterScrollingLayer;
 
     [Header("Visible Points")]
     public List<VisiblePoint> visiblePoints = new List<VisiblePoint>();
@@ -72,8 +73,15 @@ public class NoiseTerrainMain : MonoBehaviour
     }
     public void GenerateWaterScrollingLayer()
     {
+        if (waterScrollingNoiseTextureGenerator == null)
+            return;
+        waterScrollingNoiseTextureGenerator.GenerateNoiseTexture();
+        waterScrollingNoiseTextureGenerator.CombineLayers();
+        material.SetTexture("_WaterScrollingTex", waterScrollingNoiseTextureGenerator.noiseTex);
+
+        /*
         waterScrollingLayer.GenerateNoiseTexture("_WaterScrollingTex", 512, 512, NoiseType.perlin);
-        material.SetTexture("_WaterScrollingTex", waterScrollingLayer.noiseTex);
+        material.SetTexture("_WaterScrollingTex", waterScrollingLayer.noiseTex);*/
     }
 
     public void GenerateNoiseTexture()
