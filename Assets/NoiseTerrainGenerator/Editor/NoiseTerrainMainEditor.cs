@@ -19,10 +19,6 @@ public class NoiseTerrainMainEditor : Editor
         {
             main.GenerateNoiseTexture();
         }
-        if (GUILayout.Button("Generate Vegetation Texture"))
-        {
-            main.GenerateVegetationLayer();
-        }
         if (GUILayout.Button("Generate Cloud Texture"))
         {
             main.GenerateCloudLayer();

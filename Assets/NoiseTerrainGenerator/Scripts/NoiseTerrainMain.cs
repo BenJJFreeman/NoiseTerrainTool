@@ -20,9 +20,6 @@ public class NoiseTerrainMain : MonoBehaviour
     [Header("Cloud Generation")]
     public NoiseLayer cloudLayer;
 
-    [Header("Vegetaion Generation")]
-    public NoiseLayer vegetationLayer;
-
     [Header("Water Generation")]
     public NoiseTextureGenerator waterScrollingNoiseTextureGenerator;
   //  public NoiseLayer waterScrollingLayer;
@@ -39,8 +36,6 @@ public class NoiseTerrainMain : MonoBehaviour
     [Header("Controls")]
     [Range(0,1)]
     public float waterLevel;
-    [Range(0, 1)]
-    public float vegatationLevel;
     [Range(0, 1)]
     public float cloudLevel;
     [Range(0, 1)]
@@ -65,11 +60,6 @@ public class NoiseTerrainMain : MonoBehaviour
     {
         cloudLayer.GenerateNoiseTexture("_CloudTex", 128, 128, NoiseType.perlin);
         material.SetTexture("_CloudTex", cloudLayer.noiseTex);
-    }
-    public void GenerateVegetationLayer()
-    {
-        vegetationLayer.GenerateNoiseTexture("_VegatationTex", 128, 128, NoiseType.perlin);
-        material.SetTexture("_VegatationTex", vegetationLayer.noiseTex);
     }
     public void GenerateWaterScrollingLayer()
     {
@@ -96,7 +86,6 @@ public class NoiseTerrainMain : MonoBehaviour
     {
         GenerateNoiseTexture();
         GenerateWaterScrollingLayer();
-        GenerateVegetationLayer();
         GenerateCloudLayer();
     }
 
@@ -154,7 +143,6 @@ public class NoiseTerrainMain : MonoBehaviour
 
         //waterLevel += 1 * Time.deltaTime;
         material.SetFloat("_WaterLevel", waterLevel);
-        material.SetFloat("_VegetationLevel", vegatationLevel);
         material.SetFloat("_CloudHeight", cloudHeight);
         material.SetFloat("_CloudLevel", cloudLevel);
         material.SetFloat("_MapHeight", height);
