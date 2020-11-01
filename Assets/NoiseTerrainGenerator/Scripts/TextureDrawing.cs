@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+
 public class TextureDrawing : MonoBehaviour
 {
     public Camera cam;
@@ -10,14 +11,15 @@ public class TextureDrawing : MonoBehaviour
     {
         
     }
-
+    void OnSceneGUI()
+    {
+        Update();
+    }
     // Update is called once per frame
     void Update()
     {
         if (!Input.GetMouseButton(0))
             return;
-
-
 
         RaycastHit[] hits;
         hits = Physics.RaycastAll(cam.ScreenPointToRay(Input.mousePosition));
@@ -42,36 +44,54 @@ public class TextureDrawing : MonoBehaviour
             if (height < hit.transform.position.y / projectionHeight)
                 continue;
 
-
-            tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Color.white);
-            tex.Apply();
+            Circle(tex, (int)pixelUV.x, (int)pixelUV.y, 10, new Color(0.01f, 0.01f, 0.01f));
+            //tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Color.white);
+            //tex.Apply();
             break;
         }
 
-#if UNITY_EDITOR
-        //  AssetDatabase.CreateAsset(tex, "Assets/NoiseTerrainGenerator/Terrain/Terrain +".asset"");
-#endif
-        /*
-        RaycastHit hit;
-        if (!Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit))
-            return;
-        
+    }
 
-        Renderer rend = hit.transform.GetComponent<Renderer>();
-        MeshCollider meshCollider = hit.collider as MeshCollider;
+    public void Circle(Texture2D tex, int cx, int cy, int r, Color col)
+    {
+        int x, y, px, nx, py, ny, d;
+        Color[] tempArray = tex.GetPixels();
 
-        if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
-            return;
+        for (x = 0; x <= r; x++)
+        {
+            d = (int)Mathf.Ceil(Mathf.Sqrt(r * r - x * x));
+            for (y = 0; y <= d; y++)
+            {
+                px = cx + x;
+                nx = cx - x;
+                py = cy + y;
+                ny = cy - y;
 
-        Texture2D tex = rend.material.mainTexture as Texture2D;
-        Vector2 pixelUV = hit.textureCoord;
-        pixelUV.x *= tex.width;
-        pixelUV.y *= tex.height;
+                if ((py * tex.width + px) < tempArray.Length && (py * tex.width + px) >= 0)
+                {
+                    tempArray[py * tex.width + px] += col;
+                }
 
-        tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Color.white);
+                if ((py * tex.width + nx) < tempArray.Length && (py * tex.width + nx) >= 0)
+                {
+
+                    tempArray[py * tex.width + nx] += col;
+                }
+
+                if ((ny * tex.width + px) < tempArray.Length && (ny * tex.width + px) >= 0)
+                {
+
+                    tempArray[ny * tex.width + px] += col;
+                }
+
+                if ((ny * tex.width + nx) < tempArray.Length && (ny * tex.width + nx) >= 0)
+                {
+
+                    tempArray[ny * tex.width + nx] += col;
+                }
+            }
+        }
+        tex.SetPixels(tempArray);
         tex.Apply();
-
-       */
-
     }
 }
