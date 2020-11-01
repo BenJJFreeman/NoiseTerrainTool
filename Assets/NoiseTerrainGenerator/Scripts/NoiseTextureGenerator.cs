@@ -73,7 +73,7 @@ public class NoiseTextureGenerator : MonoBehaviour
 
 
 #if UNITY_EDITOR
-        AssetDatabase.CreateAsset(noiseTex, "Assets/NoiseTerrainGenerator/Terrain/" + textureName);
+        AssetDatabase.CreateAsset(noiseTex, "Assets/NoiseTerrainGenerator/Terrain/" + textureName +".asset");
 #endif
 
     }

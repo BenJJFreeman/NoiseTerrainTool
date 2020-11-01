@@ -3328,7 +3328,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cloudLayer.noiseTex
       value: 
-      objectReference: {fileID: 2800000, guid: cee306dc1d9dcef44bd35e2058b9c130, type: 2}
+      objectReference: {fileID: 2800000, guid: 5cb05a6028ede1d439f1c1fc757b0f83, type: 2}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: cloudLayer.xOrg
@@ -3417,7 +3417,7 @@ PrefabInstance:
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: cloudHeight
-      value: 0.943
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}

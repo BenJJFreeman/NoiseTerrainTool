@@ -49,7 +49,7 @@ public class TextureDrawing : MonoBehaviour
         }
 
 #if UNITY_EDITOR
-        AssetDatabase.CreateAsset(tex, "Assets/NoiseTerrainGenerator/Terrain/Terrain");
+        //  AssetDatabase.CreateAsset(tex, "Assets/NoiseTerrainGenerator/Terrain/Terrain +".asset"");
 #endif
         /*
         RaycastHit hit;

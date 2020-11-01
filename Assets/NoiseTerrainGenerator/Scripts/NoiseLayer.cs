@@ -41,7 +41,7 @@ public class NoiseLayer
 
         CalcNoise(noiseType);
 #if UNITY_EDITOR
-        AssetDatabase.CreateAsset(noiseTex, "Assets/NoiseTerrainGenerator/Terrain/" + _name + "");
+        AssetDatabase.CreateAsset(noiseTex, "Assets/NoiseTerrainGenerator/Terrain/" + _name + ".asset");
 #endif
     }
     public void GenerateNoiseTexture(int _id, int _pixWidth, int _pixHeight, NoiseType noiseType)

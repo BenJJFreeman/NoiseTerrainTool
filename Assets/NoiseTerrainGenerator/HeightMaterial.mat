@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CloudTex:
-        m_Texture: {fileID: 2800000, guid: cee306dc1d9dcef44bd35e2058b9c130, type: 2}
+        m_Texture: {fileID: 2800000, guid: 5cb05a6028ede1d439f1c1fc757b0f83, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 7c0f959aeb218244bb36af963968f238, type: 2}
+        m_Texture: {fileID: 2800000, guid: a1ade9d1706df9b4888d6bed1d716d64, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -68,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _WaterScrollingTex:
-        m_Texture: {fileID: 2800000, guid: 0531c23732b4cb341b116c3e2fc1bd45, type: 2}
+        m_Texture: {fileID: 2800000, guid: 9a4b7f3555588f14f99c44c8b011c12d, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _WaterTex:
