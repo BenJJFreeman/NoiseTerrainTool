@@ -101,7 +101,7 @@ public class NoiseTerrainMain : MonoBehaviour
 
             if (Mathf.Approximately(i, height / 2) == false)
             {
-                DestroyImmediate(go.GetComponent<Collider>());
+             //   DestroyImmediate(go.GetComponent<Collider>());
             }
 
             go.transform.position = Vector3.up * i;

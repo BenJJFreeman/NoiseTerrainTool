@@ -34,7 +34,7 @@ public class TextureDrawing : MonoBehaviour
             if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
                 continue;
 
-            tex = rend.material.mainTexture as Texture2D;
+            tex = rend.sharedMaterial.mainTexture as Texture2D;
             Vector2 pixelUV = hit.textureCoord;
             pixelUV.x *= tex.width;
             pixelUV.y *= tex.height;
