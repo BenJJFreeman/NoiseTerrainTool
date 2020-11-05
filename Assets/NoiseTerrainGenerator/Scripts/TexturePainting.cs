@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class TextureDrawing : MonoBehaviour
+public class TexturePainting : MonoBehaviour
 {
     public Camera cam;
     public float projectionHeight = 40;
     public int radius = 10;
-    public float power = 0.01f;
+    public Color color = Color.black;
     void Start()
     {
         
@@ -28,6 +28,7 @@ public class TextureDrawing : MonoBehaviour
         hits = Physics.RaycastAll(cam.ScreenPointToRay(Input.mousePosition));
 
         Texture2D tex = new Texture2D(0, 0);
+        Texture2D colourTex = new Texture2D(0, 0);
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
@@ -36,8 +37,8 @@ public class TextureDrawing : MonoBehaviour
 
             if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
                 continue;
-
             tex = rend.sharedMaterial.mainTexture as Texture2D;
+            colourTex = rend.sharedMaterial.GetTexture("_ColorTex") as Texture2D;
             Vector2 pixelUV = hit.textureCoord;
             pixelUV.x *= tex.width;
             pixelUV.y *= tex.height;
@@ -50,11 +51,7 @@ public class TextureDrawing : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                Circle(tex, (int)pixelUV.x, (int)pixelUV.y, radius, new Color(power, power, power));
-            }
-            if (Input.GetMouseButton(1))
-            {
-                Circle(tex, (int)pixelUV.x, (int)pixelUV.y, radius, new Color(-power, -power, -power));
+                Circle(colourTex, (int)pixelUV.x, (int)pixelUV.y, radius, color);
             }
             //tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Color.white);
             //tex.Apply();
@@ -88,25 +85,25 @@ public class TextureDrawing : MonoBehaviour
 
                 if ((py * tex.width + px) < tempArray.Length && (py * tex.width + px) >= 0)
                 {
-                    tempArray[py * tex.width + px] += col;
+                    tempArray[py * tex.width + px] = col;
                 }
 
                 if ((py * tex.width + nx) < tempArray.Length && (py * tex.width + nx) >= 0)
                 {
 
-                    tempArray[py * tex.width + nx] += col;
+                    tempArray[py * tex.width + nx] = col;
                 }
 
                 if ((ny * tex.width + px) < tempArray.Length && (ny * tex.width + px) >= 0)
                 {
 
-                    tempArray[ny * tex.width + px] += col;
+                    tempArray[ny * tex.width + px] = col;
                 }
 
                 if ((ny * tex.width + nx) < tempArray.Length && (ny * tex.width + nx) >= 0)
                 {
 
-                    tempArray[ny * tex.width + nx] += col;
+                    tempArray[ny * tex.width + nx] = col;
                 }
             }
         }
