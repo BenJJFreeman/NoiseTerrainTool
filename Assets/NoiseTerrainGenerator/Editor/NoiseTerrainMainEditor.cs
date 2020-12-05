@@ -27,6 +27,10 @@ public class NoiseTerrainMainEditor : Editor
         {
             main.GenerateWaterScrollingLayer();
         }
+        if (GUILayout.Button("Generate Colour Texture"))
+        {
+            main.GenerateColourTexture();
+        }
         if (GUILayout.Button("Generate Map"))
         {
             main.GenerateMap();

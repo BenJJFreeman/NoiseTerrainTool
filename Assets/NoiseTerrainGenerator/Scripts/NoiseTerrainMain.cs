@@ -73,6 +73,27 @@ public class NoiseTerrainMain : MonoBehaviour
         waterScrollingLayer.GenerateNoiseTexture("_WaterScrollingTex", 512, 512, NoiseType.perlin);
         material.SetTexture("_WaterScrollingTex", waterScrollingLayer.noiseTex);*/
     }
+    public void GenerateColourTexture()
+    {
+        Texture2D tex = new Texture2D(300, 300, TextureFormat.ARGB32, false);
+
+        Color fillColor = Color.clear;
+        Color[] fillPixels = new Color[tex.width * tex.height];
+
+        for (int i = 0; i < fillPixels.Length; i++)
+        {
+            fillPixels[i] = fillColor;
+        }
+
+        tex.SetPixels(fillPixels);
+
+        tex.Apply();
+
+#if UNITY_EDITOR
+        AssetDatabase.CreateAsset(tex, "Assets/NoiseTerrainGenerator/Terrain/" + "ColourTex" + ".asset");
+#endif
+        material.SetTexture("_ColourTex", tex);
+    }
 
     public void GenerateNoiseTexture()
     {

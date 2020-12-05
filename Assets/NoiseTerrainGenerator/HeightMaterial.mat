@@ -84,20 +84,21 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _LayeredGround: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ProjectionHeight: 40
     - _ProjectionRadius: 100
-    - _ProjectionRange: 0.6
+    - _ProjectionRange: 0.4
     - _ScrollXSpeed: 0.02
     - _ScrollYSpeed: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WaterLevel: 0.2
+    - _WaterLevel: 0.139
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.9529412, g: 0.5147836, b: 0, a: 1}

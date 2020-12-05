@@ -38,7 +38,7 @@ public class TexturePainting : MonoBehaviour
             if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
                 continue;
             tex = rend.sharedMaterial.mainTexture as Texture2D;
-            colourTex = rend.sharedMaterial.GetTexture("_ColorTex") as Texture2D;
+            colourTex = rend.sharedMaterial.GetTexture("_ColourTex") as Texture2D;
             Vector2 pixelUV = hit.textureCoord;
             pixelUV.x *= tex.width;
             pixelUV.y *= tex.height;

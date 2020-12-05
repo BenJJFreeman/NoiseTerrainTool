@@ -249,14 +249,23 @@
 			}
 			else if (uw) {
 				o.Emission = lerp(_LowUnderWaterColor, _HighUnderWaterColor, abs(heightDist / _ProjectionHeight)).rgb;
+				if (tex2D(_ColourTex, IN.uv_ColourTex).a > 0.7) {
+					o.Emission = tex2D(_ColourTex, IN.uv_ColourTex).rgb;
+				}
 				o.Alpha = 1;
 			}
 			else if (b) {
 				o.Emission = lerp(_LowBeachColor, _HighBeachColor, abs(heightDist / _ProjectionHeight)).rgb;
+				if (tex2D(_ColourTex, IN.uv_ColourTex).a > 0.7) {
+					o.Emission = tex2D(_ColourTex, IN.uv_ColourTex).rgb;
+				}
 				o.Alpha = 1; 
 			}
 			else if (g) {
-				o.Emission = tex2D(_ColourTex, IN.uv_ColourTex).rgb;
+				o.Emission = lerp(_LowColor, _HighColor, abs(heightDist / _ProjectionHeight)).rgb;
+				if (tex2D(_ColourTex, IN.uv_ColourTex).a > 0.7) {
+					o.Emission = tex2D(_ColourTex, IN.uv_ColourTex).rgb;
+				}
 				o.Alpha = 1;
 				//o.Emission = lerp(fixed3(0, 0, 0), o.Emission, saturate(c));
 			}

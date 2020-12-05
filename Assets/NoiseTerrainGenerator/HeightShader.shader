@@ -21,6 +21,7 @@
 		_ScrollXSpeed("X", Range(-10,10)) = 2
 		_ScrollYSpeed("Y", Range(-10,10)) = 3
 
+		[Toggle]_LayeredGround("is Layered", Float) = 0
 		//_ProjectionRadius("Projection Radius", Float) = 9
 		//_WaterLevel("Water Level",Range(0, 1)) = 0.25
 	}
@@ -86,6 +87,9 @@
 
 		sampler2D _WaterScrollingTexDuplicate;
 
+
+		bool _LayeredGround;
+
 		void surf (Input IN, inout SurfaceOutputStandard o) {			
 			// checks if within distant of the ponts
 			// if not clips it
@@ -112,8 +116,13 @@
 			float heightDist = height - IN.worldPos.y;
 			
 			bool g = false;
-			if ((_ProjectionRange - abs(heightDist)) >0 || tex2D(_MainTex, IN.uv_MainTex).r > (IN.worldPos.y / _ProjectionHeight)) {
+			if ((_ProjectionRange - abs(heightDist)) >0) {
 				g = true;
+			}
+			if (_LayeredGround) {
+				if (tex2D(_MainTex, IN.uv_MainTex).r > (IN.worldPos.y / _ProjectionHeight)) {
+					g = true;
+				}
 			}
 
 			bool c = false;
@@ -134,6 +143,7 @@
 				if (g) {
 					uw = true;
 					g = false;
+				//	b = false;
 				}
 			}
 
