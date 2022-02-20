@@ -4704,7 +4704,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cloudLayer.noiseTex
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2800000, guid: 5cb05a6028ede1d439f1c1fc757b0f83, type: 2}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: cloudLayer.xOrg
@@ -4783,7 +4783,7 @@ PrefabInstance:
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
       propertyPath: waterLevel
-      value: 0.2
+      value: 0.314
       objectReference: {fileID: 0}
     - target: {fileID: 1056231084237563844, guid: 83a348b4a842f7545989c3b1776f27a6,
         type: 3}
@@ -5221,7 +5221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134443500}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 250, y: 0, z: 250}
+  m_LocalPosition: {x: 231.3, y: 0, z: 250}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 550086782}
@@ -7534,7 +7534,7 @@ PrefabInstance:
     - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
         type: 3}
       propertyPath: noiseLayers.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
         type: 3}
@@ -7614,7 +7614,7 @@ PrefabInstance:
     - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
         type: 3}
       propertyPath: noiseLayers.Array.data[2].seed
-      value: 453
+      value: 5678676
       objectReference: {fileID: 0}
     - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
         type: 3}
@@ -7624,18 +7624,78 @@ PrefabInstance:
     - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
         type: 3}
       propertyPath: noiseLayers.Array.data[2].xOrg
-      value: 57809
+      value: 55010
       objectReference: {fileID: 0}
     - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
         type: 3}
       propertyPath: noiseLayers.Array.data[2].yOrg
-      value: 83049
+      value: 24060
       objectReference: {fileID: 0}
     - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
         type: 3}
       propertyPath: noiseTex
       value: 
-      objectReference: {fileID: 2800000, guid: a1ade9d1706df9b4888d6bed1d716d64, type: 2}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[3].noiseTex
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[3].seed
+      value: 5678676
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[3].scale
+      value: 8.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[3].xOrg
+      value: 55010
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[3].yOrg
+      value: 24060
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[3].addition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[4].addition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[4].noiseTex
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[4].seed
+      value: 56879879
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[4].scale
+      value: 5.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[4].xOrg
+      value: 55010
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882489078910186735, guid: a04c84f82b1bdbf41a87272950447f04,
+        type: 3}
+      propertyPath: noiseLayers.Array.data[4].yOrg
+      value: 24060
+      objectReference: {fileID: 0}
     - target: {fileID: 6882489078910186768, guid: a04c84f82b1bdbf41a87272950447f04,
         type: 3}
       propertyPath: m_LocalPosition.x
