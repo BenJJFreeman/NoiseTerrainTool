@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: PaintedHeightMaterial
   m_Shader: {fileID: 4800000, guid: 37debbe05a314b441ab693e44fb85fc4, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _LAYEREDGROUND_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -92,7 +92,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LayeredGround: 0
+    - _LayeredGround: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

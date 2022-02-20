@@ -53,8 +53,8 @@ public class NoiseTerrainMain : MonoBehaviour
     }
     private void Start()
     {
-        GenerateCloudLayer();
-        GenerateWaterScrollingLayer();
+        //GenerateCloudLayer();
+        //GenerateWaterScrollingLayer();
     }
     public void GenerateCloudLayer()
     {
@@ -175,7 +175,7 @@ public class NoiseTerrainMain : MonoBehaviour
     }
     void UpdateCloudLayer()
     {
-        cloudLayer.UpdateNoiseTexture(.5f, 0,NoiseType.perlin);
+      //  cloudLayer.UpdateNoiseTexture(.5f, 0,NoiseType.perlin);
     }
     public VisiblePoint AddVisiblePoint()
     {

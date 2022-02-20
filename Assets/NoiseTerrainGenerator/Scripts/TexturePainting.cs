@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using HSVPicker;
 
 public class TexturePainting : MonoBehaviour
 {
     public Camera cam;
     public float projectionHeight = 40;
     public int radius = 10;
-    public Color color = Color.black;
+   // public Color color = Color.black;
+    public ColorPicker colorPicker;
     void Start()
     {
         
@@ -51,7 +53,7 @@ public class TexturePainting : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                Circle(colourTex, (int)pixelUV.x, (int)pixelUV.y, radius, color);
+                Circle(colourTex, (int)pixelUV.x, (int)pixelUV.y, radius, colorPicker.CurrentColor);
             }
             //tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Color.white);
             //tex.Apply();
