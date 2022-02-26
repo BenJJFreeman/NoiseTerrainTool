@@ -85,6 +85,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Amount: -1
+    - _BorderSize: 0
     - _BumpScale: 1
     - _CellSize: 10
     - _Cutoff: 0.5
@@ -106,10 +107,12 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _TimeScale: 0.31
     - _UVSec: 0
     - _WaterLevel: 0.274
     - _ZWrite: 1
     m_Colors:
+    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 0.9529412, g: 0.5147836, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HighBeachColor: {r: 0.7735849, g: 0.74233824, b: 0.54369885, a: 1}

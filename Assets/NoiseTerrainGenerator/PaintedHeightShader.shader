@@ -28,6 +28,9 @@
 
 
 			_CellSize("Cell Size", Range(0, 10)) = 2
+			_TimeScale("Scrolling Speed", Range(0, 2)) = 1
+			_BorderColor("Border Color", Color) = (0,0,0,1)
+			_BorderSize("Border Size", Range(0.000, 0.1)) = 0.05
 		//_ProjectionRadius("Projection Radius", Float) = 9
 		//_WaterLevel("Water Level",Range(0, 1)) = 0.25
 	}
@@ -102,7 +105,11 @@
 
 		float _CellSize;
 		
-		float2 voronoiNoise(float2 value) {
+		float _TimeScale;
+		float3 _BorderColor;
+		float _BorderSize;
+
+		float2 voronoiNoise2D(float2 value) {
 			float2 baseCell = floor(value);
 
 			float minDistToCell = 10;
@@ -124,7 +131,59 @@
 			float random = rand2dTo1d(closestCell);
 			return float2(minDistToCell, random);
 		}
+		float3 voronoiNoise3D(float3 value) {
+			float3 baseCell = floor(value);
 
+			//first pass to find the closest cell
+			float minDistToCell = 10;
+			float3 toClosestCell;
+			float3 closestCell;
+			[unroll]
+			for (int x1 = -1; x1 <= 1; x1++) {
+				[unroll]
+				for (int y1 = -1; y1 <= 1; y1++) {
+					[unroll]
+					for (int z1 = -1; z1 <= 1; z1++) {
+						float3 cell = baseCell + float3(x1, y1, z1);
+						float3 cellPosition = cell + rand3dTo3d(cell);
+						float3 toCell = cellPosition - value;
+						float distToCell = length(toCell);
+						if (distToCell < minDistToCell) {
+							minDistToCell = distToCell;
+							closestCell = cell;
+							toClosestCell = toCell;
+						}
+					}
+				}
+			}
+
+			//second pass to find the distance to the closest edge
+			float minEdgeDistance = 10;
+			[unroll]
+			for (int x2 = -1; x2 <= 1; x2++) {
+				[unroll]
+				for (int y2 = -1; y2 <= 1; y2++) {
+					[unroll]
+					for (int z2 = -1; z2 <= 1; z2++) {
+						float3 cell = baseCell + float3(x2, y2, z2);
+						float3 cellPosition = cell + rand3dTo3d(cell);
+						float3 toCell = cellPosition - value;
+
+						float3 diffToClosestCell = abs(closestCell - cell);
+						bool isClosestCell = diffToClosestCell.x + diffToClosestCell.y + diffToClosestCell.z < 0.1;
+						if (!isClosestCell) {
+							float3 toCenter = (toClosestCell + toCell) * 0.5;
+							float3 cellDifference = normalize(toCell - toClosestCell);
+							float edgeDistance = dot(toCenter, cellDifference);
+							minEdgeDistance = min(minEdgeDistance, edgeDistance);
+						}
+					}
+				}
+			}
+
+			float random = rand3dTo1d(closestCell);
+			return float3(minDistToCell, random, minEdgeDistance);
+		}
 		void surf (Input IN, inout SurfaceOutputStandard o) {			
 			// checks if within distant of the ponts
 			// if not clips it
@@ -214,7 +273,10 @@
 
 			o.Albedo = float3(0,0,0);	
 			if (w) {
-
+				/*
+				float3 value = IN.worldPos.xyz / _CellSize;
+				value.y += _Time.y * _TimeScale;
+				float noise = voronoiNoise2D(value);*/
 
 			//	float2 uv = IN.uv_WaterScrollingTex + (fixed2(_ScrollXSpeed, _ScrollYSpeed) * _Time);
 				
@@ -265,6 +327,10 @@
 
 				//o.uv = _WaterScrollingTex.xy + _WaterScrollingTex.zw;
 
+
+
+				
+				
 				// colour
 				if (c.r <= 0.1) {
 					o.Emission = fixed3(0.75, 0.75, 0.75);
@@ -272,11 +338,31 @@
 					o.Alpha = 0.75;
 				}
 				else {
+					
+					/*
 					//o.Emission = lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).rgb;
 					o.Emission = lerp(_HighWaterColor, _LowWaterColor, (c.rgb)).rgb;
 					//o.Emission = c.rgb;
 					o.Alpha = lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).a;
+					*/
+
+					// voronoi 
+					float3 value = IN.worldPos.xyz / _CellSize;
+					value.y += _Time.y * _TimeScale;
+					float3 noise = voronoiNoise3D(value);
+
+					float3 cellColor = rand1dTo3d(noise.y);
+					float valueChange = fwidth(value.z) * 0.5;
+					float isBorder = 1 - smoothstep(_BorderSize - valueChange, _BorderSize + valueChange, noise.z);
+					//float3 color = lerp(_HighWaterColor, _LowWaterColor, isBorder).rgb;
+					float3 color = lerp(_HighWaterColor, _LowWaterColor, cellColor.r).rgb;
+					o.Emission = color;
+					o.Alpha = lerp(_HighWaterColor, _LowWaterColor, (_WaterLevel - tex2D(_MainTex, IN.uv_MainTex).r)).a;
+
+
 				}
+
+				
 			}
 			else if (uw) {
 				o.Emission = lerp(_LowUnderWaterColor, _HighUnderWaterColor, abs(heightDist / _ProjectionHeight)).rgb;
@@ -287,7 +373,7 @@
 			}
 			else if (b) {
 				float2 value = IN.worldPos.xz / _CellSize;
-				float noise = voronoiNoise(value).y;
+				float noise = voronoiNoise2D(value).y;
 				o.Emission = lerp(_LowBeachColor, _HighBeachColor, abs(heightDist / _ProjectionHeight)).rgb  + (noise/10);
 				if (tex2D(_ColourTex, IN.uv_ColourTex).a > 0.7) {
 					o.Emission = tex2D(_ColourTex, IN.uv_ColourTex).rgb;
@@ -295,12 +381,27 @@
 				o.Alpha = 1; 
 			}
 			else if (g) {
-				float2 value = IN.worldPos.xz / _CellSize;
-				float noise = voronoiNoise(value).y;
+				float2 value = IN.worldPos.xz / _CellSize;				
+				float noise = voronoiNoise2D(value).y;
 				o.Emission = lerp(_LowColor, _HighColor, abs(abs(heightDist / _ProjectionHeight) - _WaterLevel )).rgb + (noise / 10);
 				if (tex2D(_ColourTex, IN.uv_ColourTex).a > 0.7) {
 					o.Emission = tex2D(_ColourTex, IN.uv_ColourTex).rgb + (noise / 10);
 				}
+
+				// shadows
+				// get direction of sun 
+				// get every pixel in that direction and if value higher make shadow
+				// get angle of sun
+				// get a small length of pixels in the direction and if value higher make shadow
+				// 
+
+				// foliage
+				// noise texture
+				// if noise if above an amount 
+				// have colour
+				// the folliage height is based on the noise value
+
+
 				o.Alpha = 1;
 				//o.Emission = lerp(fixed3(0, 0, 0), o.Emission, saturate(c));
 			}
