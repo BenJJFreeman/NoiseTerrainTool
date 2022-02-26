@@ -86,6 +86,7 @@ Material:
     m_Floats:
     - _Amount: -1
     - _BumpScale: 1
+    - _CellSize: 10
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -99,14 +100,14 @@ Material:
     - _Parallax: 0.02
     - _ProjectionHeight: 40
     - _ProjectionRadius: 100
-    - _ProjectionRange: 0.4
-    - _ScrollXSpeed: 0
+    - _ProjectionRange: 0.44
+    - _ScrollXSpeed: 0.02
     - _ScrollYSpeed: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WaterLevel: 0.314
+    - _WaterLevel: 0.274
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.9529412, g: 0.5147836, b: 0, a: 1}

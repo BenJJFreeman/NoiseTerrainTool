@@ -25,6 +25,9 @@
 		_ColourTex("Colour Tex (RGB)", 2D) = "white" {}
 		[Toggle]_LayeredGround("is Layered", Float) = 0
 
+
+
+			_CellSize("Cell Size", Range(0, 10)) = 2
 		//_ProjectionRadius("Projection Radius", Float) = 9
 		//_WaterLevel("Water Level",Range(0, 1)) = 0.25
 	}
@@ -45,6 +48,8 @@
 
 		// Use shader model 3.0 target, to get nicer looking lighting
 		#pragma target 3.0
+
+		#include "Random.cginc"
 
 		sampler2D _MainTex;
 		sampler2D _CloudTex;
@@ -93,6 +98,32 @@
 		sampler2D _WaterScrollingTexDuplicate;
 
 		bool _LayeredGround;
+
+
+		float _CellSize;
+		
+		float2 voronoiNoise(float2 value) {
+			float2 baseCell = floor(value);
+
+			float minDistToCell = 10;
+			float2 closestCell;
+			[unroll]
+			for (int x = -1; x <= 1; x++) {
+				[unroll]
+				for (int y = -1; y <= 1; y++) {
+					float2 cell = baseCell + float2(x, y);
+					float2 cellPosition = cell + rand2dTo2d(cell);
+					float2 toCell = cellPosition - value;
+					float distToCell = length(toCell);
+					if (distToCell < minDistToCell) {
+						minDistToCell = distToCell;
+						closestCell = cell;
+					}
+				}
+			}
+			float random = rand2dTo1d(closestCell);
+			return float2(minDistToCell, random);
+		}
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {			
 			// checks if within distant of the ponts
@@ -255,14 +286,18 @@
 				o.Alpha = 1;
 			}
 			else if (b) {
-				o.Emission = lerp(_LowBeachColor, _HighBeachColor, abs(heightDist / _ProjectionHeight)).rgb;
+				float2 value = IN.worldPos.xz / _CellSize;
+				float noise = voronoiNoise(value).y;
+				o.Emission = lerp(_LowBeachColor, _HighBeachColor, abs(heightDist / _ProjectionHeight)).rgb  + (noise/10);
 				if (tex2D(_ColourTex, IN.uv_ColourTex).a > 0.7) {
 					o.Emission = tex2D(_ColourTex, IN.uv_ColourTex).rgb;
 				}
 				o.Alpha = 1; 
 			}
 			else if (g) {
-				o.Emission = lerp(_LowColor, _HighColor, abs(heightDist / _ProjectionHeight)).rgb;
+				float2 value = IN.worldPos.xz / _CellSize;
+				float noise = voronoiNoise(value).y;
+				o.Emission = lerp(_LowColor, _HighColor, abs(heightDist / _ProjectionHeight)).rgb + (noise / 10);
 				if (tex2D(_ColourTex, IN.uv_ColourTex).a > 0.7) {
 					o.Emission = tex2D(_ColourTex, IN.uv_ColourTex).rgb;
 				}
