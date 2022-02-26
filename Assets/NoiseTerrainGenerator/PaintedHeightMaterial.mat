@@ -100,7 +100,7 @@ Material:
     - _Parallax: 0.02
     - _ProjectionHeight: 40
     - _ProjectionRadius: 100
-    - _ProjectionRange: 0.44
+    - _ProjectionRange: 0.53
     - _ScrollXSpeed: 0.02
     - _ScrollYSpeed: 0.02
     - _SmoothnessTextureChannel: 0
@@ -113,12 +113,12 @@ Material:
     - _Color: {r: 0.9529412, g: 0.5147836, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HighBeachColor: {r: 0.7735849, g: 0.74233824, b: 0.54369885, a: 1}
-    - _HighColor: {r: 0.25319496, g: 0.5, b: 0.23820755, a: 1}
+    - _HighColor: {r: 0.39287043, g: 0.8018868, b: 0.36690104, a: 1}
     - _HighUnderWaterColor: {r: 0.8207547, g: 0.6409668, b: 0.36004803, a: 1}
     - _HighVegetationColor: {r: 0, g: 0.5, b: 0, a: 1}
     - _HighWaterColor: {r: 0.25938943, g: 0.71319187, b: 0.8207547, a: 0.5529412}
     - _LowBeachColor: {r: 0.5943396, g: 0.5235078, b: 0.36165005, a: 1}
-    - _LowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LowColor: {r: 0.07151491, g: 0.1792453, b: 0.061721254, a: 1}
     - _LowUnderWaterColor: {r: 0.1792453, g: 0.16187263, b: 0.117524035, a: 1}
     - _LowVegetationColor: {r: 0, g: 1, b: 0, a: 1}
     - _LowWaterColor: {r: 0.1792453, g: 0.575608, b: 0.7169812, a: 0.8509804}

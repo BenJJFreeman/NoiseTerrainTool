@@ -297,9 +297,9 @@
 			else if (g) {
 				float2 value = IN.worldPos.xz / _CellSize;
 				float noise = voronoiNoise(value).y;
-				o.Emission = lerp(_LowColor, _HighColor, abs(heightDist / _ProjectionHeight)).rgb + (noise / 10);
+				o.Emission = lerp(_LowColor, _HighColor, abs(abs(heightDist / _ProjectionHeight) - _WaterLevel )).rgb + (noise / 10);
 				if (tex2D(_ColourTex, IN.uv_ColourTex).a > 0.7) {
-					o.Emission = tex2D(_ColourTex, IN.uv_ColourTex).rgb;
+					o.Emission = tex2D(_ColourTex, IN.uv_ColourTex).rgb + (noise / 10);
 				}
 				o.Alpha = 1;
 				//o.Emission = lerp(fixed3(0, 0, 0), o.Emission, saturate(c));
