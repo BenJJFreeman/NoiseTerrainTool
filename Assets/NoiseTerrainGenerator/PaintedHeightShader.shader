@@ -239,6 +239,18 @@
 					g = false;
 				}
 			}
+			
+			bool t = false;
+			float2 value = IN.worldPos.xz / 1;
+			float noise = voronoiNoise2D(value).y;
+			if (noise < 0.1 && tex2D(_MainTex, IN.uv_MainTex).r < (IN.worldPos.y / _ProjectionHeight) && ((IN.worldPos.y / _ProjectionHeight) - tex2D(_MainTex, IN.uv_MainTex).r) < .1 && tex2D(_MainTex, IN.uv_MainTex).r >= _WaterLevel) {
+				value = IN.worldPos.xz / 50;
+				noise = voronoiNoise2D(value).y;
+				if (noise < 0.25) {
+					t = true;
+				}
+			}
+
 
 			///else {
 				//clip(_ProjectionRange - abs(heightDist));
@@ -408,6 +420,10 @@
 			else if (c) {				
 				o.Emission = fixed3(1, 1, 1);
 				o.Alpha = 0.25;
+			}
+			else if (t) {
+				o.Emission = fixed3(1, 0, 0);
+				o.Alpha = 1.0;
 			}
 			else{
 				//clip(0);
