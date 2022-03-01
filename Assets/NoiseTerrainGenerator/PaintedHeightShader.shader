@@ -11,6 +11,9 @@
 
 		_HighUnderWaterColor("High Under Water Color", Color) = (0,0,0,1)
 		_LowUnderWaterColor("Low Under Water Color", Color) = (0,0,0,1)
+		
+		_TreeWoodColour("Tree Wood Colour", Color) = (0,0,0,1)
+		_TreeLeavesColour("Tree Leaves Colour", Color) = (0,0,0,1)
 
 		_MainTex("Terrain Tex (RGB)", 2D) = "white" {}
 		_ProjectionHeight ("Projection Height", Float) = 4
@@ -31,6 +34,11 @@
 			_TimeScale("Scrolling Speed", Range(0, 2)) = 1
 			_BorderColor("Border Color", Color) = (0,0,0,1)
 			_BorderSize("Border Size", Range(0.000, 0.1)) = 0.05
+
+
+			_ForestCellSize("Forest Cell Size", Range(0, 100)) = 50
+			_ForestCellDensity("Forest Cell Density", Range(0, 1)) = 0.25
+			_ForestDensity("Forest Density", Range(0, 1)) = .1
 		//_ProjectionRadius("Projection Radius", Float) = 9
 		//_WaterLevel("Water Level",Range(0, 1)) = 0.25
 	}
@@ -79,6 +87,9 @@
 		fixed4 _HighUnderWaterColor;
 		fixed4 _LowUnderWaterColor;
 
+		fixed4 _TreeWoodColour;
+		fixed4 _TreeLeavesColour;
+
 		float _ProjectionHeight;
 		float _ProjectionRange;
 		float _ProjectionRadius;
@@ -108,6 +119,13 @@
 		float _TimeScale;
 		float3 _BorderColor;
 		float _BorderSize;
+
+		float _ForestCellSize;
+		float _ForestCellDensity;
+		float _ForestDensity;
+
+
+
 
 		float2 voronoiNoise2D(float2 value) {
 			float2 baseCell = floor(value);
@@ -240,16 +258,26 @@
 				}
 			}
 			
-			bool t = false;
-			float2 value = IN.worldPos.xz / 1;
+			bool tt = false;
+			bool tl = false;
+			
+			
+			float2 value = IN.worldPos.xz / _ForestCellSize;
 			float noise = voronoiNoise2D(value).y;
-			if (noise < 0.1 && tex2D(_MainTex, IN.uv_MainTex).r < (IN.worldPos.y / _ProjectionHeight) && ((IN.worldPos.y / _ProjectionHeight) - tex2D(_MainTex, IN.uv_MainTex).r) < .1 && tex2D(_MainTex, IN.uv_MainTex).r >= _WaterLevel) {
-				value = IN.worldPos.xz / 50;
+			if (noise < _ForestCellDensity) {
+				value = IN.worldPos.xz / 1;
 				noise = voronoiNoise2D(value).y;
-				if (noise < 0.25) {
-					t = true;
+				if (noise < _ForestDensity && tex2D(_MainTex, IN.uv_MainTex).r < (IN.worldPos.y / _ProjectionHeight) && ((IN.worldPos.y / _ProjectionHeight) - tex2D(_MainTex, IN.uv_MainTex).r) < 0.1 && tex2D(_MainTex, IN.uv_MainTex).r >= _WaterLevel) {
+					if (((IN.worldPos.y / _ProjectionHeight) - tex2D(_MainTex, IN.uv_MainTex).r) > .05) {
+						tl = true;
+					}
+					else {
+						tt = true;
+					}
 				}
 			}
+
+			
 
 
 			///else {
@@ -421,8 +449,12 @@
 				o.Emission = fixed3(1, 1, 1);
 				o.Alpha = 0.25;
 			}
-			else if (t) {
-				o.Emission = fixed3(1, 0, 0);
+			else if (tt) {
+				o.Emission = _TreeWoodColour;
+				o.Alpha = 1.0;
+			}
+			else if (tl) {
+				o.Emission = _TreeLeavesColour;
 				o.Alpha = 1.0;
 			}
 			else{
